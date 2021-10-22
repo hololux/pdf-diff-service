@@ -1,7 +1,14 @@
 # Do not include azure-functions-worker as it may conflict with the Azure Functions platform
 
+#function
 azure-functions
+
+#pdfcompare
 pyPdf
+PyPDF2
 reportlab
 pygame
 poppler-utils
+
+#imgcmp
+scipy

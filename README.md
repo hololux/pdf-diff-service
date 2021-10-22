@@ -8,3 +8,5 @@ Create a virtual environment using:\
 
 Install dependencies using:\
 `python -m pip install -r requirements.txt`
+
+To run the function locally outside of docker you need **pdftohtml** Version 0.74.0 or higher. (Not available on MacOS)
