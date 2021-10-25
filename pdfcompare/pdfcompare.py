@@ -729,7 +729,6 @@ def xml2fontinfo(dom, last_page=None):
         fsize = 12.0
       f = PGF.Font(f_file, int(0.5+float(fsize)))
       p_finfo[f_id] = { 'name': fname, 'size':fsize, 'file': f_file, 'font':f }
-      print(p_finfo)
     #pprint(p_finfo)
     finfo.append(p_finfo)
   return finfo
@@ -1066,7 +1065,7 @@ def main():
     outputStream.close()
     print("%s (%s pages) written." % (args.output, pages_written))
 
-  return output
+  return (output, total_hits)
   # if total_hits:
   #   sys.exit(1)
   # else:
