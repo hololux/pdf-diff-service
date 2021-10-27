@@ -2,11 +2,10 @@ from io import BytesIO
 import logging
 import base64
 import os
-import sys
 import json
 
 import azure.functions as func
-from pdfcompare import pdfcompare
+from pdfcompare import pdfcompare_module
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -21,7 +20,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     except ValueError:
         return func.HttpResponse("Request body is not valid JSON", status_code=400)
 
-    if  not pdfOld or not pdfNew:
+    if not pdfOld or not pdfNew:
         return func.HttpResponse(
             "One or more parameters missing. Required: pdfOld, pdfNew.",
             status_code=400
@@ -39,18 +38,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     with open(pdf_path_new,"wb") as f:
         f.write(base64.b64decode(pdfNew.split(",", 1)[-1]))
 
-    saved_argv = sys.argv
     base64String = ''
     hits = 0
 
     try:
-        sys.argv = [
-            '-c',
-            pdf_path_old,
-            pdf_path_new,
-            "--no-output"
-        ]
-        (output, hits) = pdfcompare.main()
+        (output, hits) = pdfcompare_module.compare_pdfs(pdf_path_old, pdf_path_new)
         out = BytesIO()
         output.write(out)
         base64String = "data:image/pdf;base64," + base64.b64encode(out.getvalue()).decode()
@@ -63,7 +55,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             os.remove(pdf_path_old)
         if os.path.exists(pdf_path_new):
             os.remove(pdf_path_new)
-        sys.argv = saved_argv
 
     if base64String:
         return func.HttpResponse(json.dumps({
