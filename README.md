@@ -5,7 +5,7 @@ Azure Function wrapper for https://github.com/jnweiger/pdfcompare. It uses an ad
 ## Prerequsites
 
 Requires Python Version 3.6 - 3.8.
-Create a virtual environment using:\
+Create a virtual environment in the root folder of the repository using:\
 `python -m venv .venv`
 
 You can deactivate it with:\
