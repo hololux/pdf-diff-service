@@ -27,5 +27,6 @@ jobs:
 
       - name: Unit Tests
         run: |
+          sudo apt-get install poppler-utils
           python -m pip install -r requirements.txt
           python3 -m unittest tests.unittests
