@@ -2,6 +2,8 @@ from io import BytesIO
 import os
 import base64
 import unittest
+
+from PyPDF2 import pdf
 from pdfcompare import pdfcompare_module
 
 class TestPdfCompareModule(unittest.TestCase):
@@ -18,6 +20,18 @@ class TestPdfCompareModule(unittest.TestCase):
     base64String = base64.b64encode(out.getvalue()).decode()
     self.assertNotEqual(base64String, "")
     self.assertGreater(hits, 0)
+
+  def test_same_pdf(self):
+    (output, hits) = pdfcompare_module.compare_pdfs(self.pdf_path_old, self.pdf_path_old)
+    out = BytesIO()
+    output.write(out)
+    base64String = base64.b64encode(out.getvalue()).decode()
+    pdf_old_b64 = ""
+    with open(self.pdf_path_old, 'rb') as f:
+      pdf_old_b64 = base64.b64encode(f.read()).decode()
+    self.assertNotEqual(base64String, "")
+    self.assertEqual(base64String, pdf_old_b64)
+    self.assertEqual(hits, 0)
 
 if __name__ == '__main__':
   unittest.main()
