@@ -3,7 +3,6 @@ import os
 import base64
 import unittest
 
-from PyPDF2 import pdf
 from pdfcompare import pdfcompare_module
 
 class TestPdfCompareModule(unittest.TestCase):

@@ -4,7 +4,7 @@
 
 - Push the image to a docker hub of your choice. You can use Azure Container Registry for this. If you do, tag the image \<Login Server\>/\<container name\>(:\<Version\>).
 - Create the Function App in a Resource Group and choose **'Docker Container'** for the publish setting. \
-  Note: This requires a [Functions Premium Plan](https://docs.microsoft.com/en-us/azure/azure-functions/functions-premium-plan?tabs=portal)
+  Note: This requires an App Service Plan (recommended) or [Functions Premium Plan](https://docs.microsoft.com/en-us/azure/azure-functions/functions-premium-plan?tabs=portal)
 - In your Function App navigate to the Deployment Center, choose **'Container Registry'** and configure accordingly. Copy the webhook URL at the bottom of the page.
 - Configure the webhook URL in your container registry.
 
