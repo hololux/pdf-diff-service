@@ -21,10 +21,10 @@ To run the function locally outside of docker you need **pdftohtml** Version 0.7
 ## Running the function locally from container
 
 Create the image using:\
-`docker build --tag <DOCKER_ID>/azurefunctionsimage:v1.0.0 .`
+`docker build --tag <DOCKER_ID>/remap:v0.0.1 .`
 
 Run the container using:\
-`docker run -p 8080:80 -it <docker_id>/azurefunctionsimage:v1.0.0`
+`docker run -p 8080:80 -it <docker_id>/remap:v0.0.1`
 
 ## API specification
 
@@ -53,3 +53,5 @@ The API will return the following JSON:
 
 - changePdf: The pdfNew file with annotations on what has changed compared to the pdfOld file
 - hasChanges: Indicates whether or not the two files have any differences
+
+New text that was added will be marked 🟢​ green​, passages that changed will have 🟡 yellow markings. 🔴 Red ​marks indicate deleted text.
